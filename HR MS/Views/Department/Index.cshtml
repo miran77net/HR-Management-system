@@ -1,0 +1,67 @@
+﻿@model List<Department>
+<h3 class="mb-3">Departments</h3>
+@{
+    var userRole = Context.Session.GetString("UserRole");
+   
+    if (userRole == "HRSir")
+    {
+      
+        <a class="btn btn-primary mb-3" asp-area="" asp-controller="Department" asp-action="Create">+ Add Department</a>
+    }
+                            
+}
+<div class="card shadow">
+
+    <div class="card-body">
+
+        <table class="table table-bordered table-hover">
+
+            <thead class="table-dark text-center">
+
+                <tr>
+                    <th>ID</th>
+                    <th>Department ID</th>
+                    <th>Department Name</th>
+                    
+                    <th>Actions</th>
+                </tr>
+
+            </thead>
+
+            <tbody class="text-center">
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td>@item.Id</td>
+
+                        <td>@item.DepartmentID</td>
+
+                        <td>@item.DepartmentName</td>
+
+                        <td>
+
+                            <a asp-action="Edit"
+                                   asp-route-id="@item.Id"
+                                   class="btn btn-warning btn-sm">
+                                Edit
+                            </a>
+
+                            <a asp-action="Delete"
+                                   asp-route-id="@item.Id"
+                                   class="btn btn-danger btn-sm">
+                                Delete
+                            </a>
+
+                        </td>
+
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+</div>

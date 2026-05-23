@@ -1,0 +1,29 @@
+﻿<link rel="stylesheet" href="~/css/login.css" asp-append-version="true" />
+@{
+    Layout = null;
+}
+@model user
+
+<div class="login-container">
+<form class="form" method="post">
+    <p class="form-title">log in to your account</p>
+    <div class="input-container">
+        <input placeholder="Enter email" type="email" name="Email">
+    </div>
+    <div class="input-container">
+        <input placeholder="Enter password" type="password" name="Password">
+    </div>
+    <button class="submit" type="submit">
+        log in
+    </button>
+
+    <p class="signup-link">
+        No account?
+            <a asp-area="" asp-controller="Account" asp-action="Signup">Sign up</a>
+    </p>
+</form>
+</div>
+@if (ViewBag.Error != null)
+{
+    <p style="color:red">@ViewBag.Error</p>
+}

@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - HR_MS</title>
+    <script type="importmap"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/HR_MS.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="sidebar">
+        <h4>HR System</h4>
+        @{
+            var userEmail = Context.Session.GetString("UserEmail");
+            var userRole = Context.Session.GetString("UserRole");
+
+        if (userRole == "HRSir")
+        {
+        <a class="bi bi-speedometer2" asp-area="" asp-controller="Dashboard" asp-action="Dashboard">Dashboard</a>
+        }
+        }
+        <a class="bi bi-people" asp-area="" asp-controller="Dashboard" asp-action="Employees">Employees</a>
+        
+        <a class="bi bi-house" asp-area="" asp-controller="Home" asp-action="Index">Attendance</a>
+
+        <a class="bi bi-house" asp-area="" asp-controller="Department" asp-action="Index">Department</a>
+        @{
+        
+           if (userEmail == null)
+             {
+                <a class="bi bi-house" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+             }
+              else
+              {
+                <a class="bi bi-house" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
+
+              }
+
+        }            
+    </div>
+   @{ if (userRole == "HRSir")
+    {
+        <div class="main">
+
+        <div class="topbar">
+            <h5>Welcome HR </h5>
+   </div>
+   </div>
+    }
+    }
+    <div class="main">
+
+            <div>
+                <i class="bi bi-bell me-3"></i>
+                <i class="bi bi-person-circle"></i>
+            
+
+    
+   
+        </div>
+
+        @RenderBody()
+
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

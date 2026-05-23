@@ -1,0 +1,92 @@
+﻿@model List<Attendance>
+<h3 class="mb-3">Attendance</h3>
+@{
+    var userRole = Context.Session.GetString("UserRole");
+   
+    if (userRole == "HRSir")
+    {
+      
+        <a class="btn btn-primary mb-3" asp-area="" asp-controller="Home" asp-action="Create">+ Add Attendance</a>
+    }
+                            
+}
+<div class="card shadow">
+
+    <div class="card-body">
+
+        <table class="table table-bordered table-hover">
+
+            <thead class="table-dark text-center">
+
+                <tr>
+                    <th>ID</th>
+                    <th>Employee Name</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+
+            </thead>
+
+            <tbody class="text-center">
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td>@item.Id</td>
+
+                        <td>@item.EmployeeName</td>
+
+                        <td>@item.Date.ToShortDateString()</td>
+
+                        <td>
+
+                            @if (item.Status == "Present")
+                            {
+                                <span class="badge bg-success">
+                                    Present
+                                </span>
+                            }
+                            else if (item.Status == "Absent")
+                            {
+                                <span class="badge bg-secondary">
+                                    Absent
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-danger">
+                                    Leave
+                                </span>
+                            }
+
+                        </td>
+
+                        <td>
+
+                            <a asp-action="Edit"
+                                   asp-route-id="@item.Id"
+                                   class="btn btn-warning btn-sm">
+                                Edit
+                            </a>
+
+                            <a asp-action="Delete"
+                                   asp-route-id="@item.Id"
+                                   class="btn btn-danger btn-sm">
+                                Delete
+                            </a>
+
+                        </td>
+
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+
+        </div>
+        </div>
+
+<script src="~/js/Attandence.js" asp-append-version="true"></script> 

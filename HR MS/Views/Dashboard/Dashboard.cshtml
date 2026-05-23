@@ -1,0 +1,82 @@
+﻿@{
+  
+}
+@model List<Employees>;
+
+<h3 class="mb-4">Dashboard</h3>
+
+<div class="row g-4">
+
+    <div class="col-md-3">
+        <div class="card-box bg-blue">
+            <h6>Total Employees</h6>
+            <h2>@ViewBag.TotalEmployees</h2>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card-box bg-info">
+            <h6>Total Department</h6>
+            <h2>@ViewBag.TotalDepartments</h2>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card-box bg-green">
+            <h6>Today Present</h6>
+            <h2>@ViewBag.TotalPresent</h2>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card-box bg-red">
+            <h6>Approved Leaves</h6>
+            <h2>@ViewBag.TotalLeave</h2>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card-box bg-secondary">
+            <h6>Total Absent</h6>
+            <h2>@ViewBag.TotalAbsent</h2>
+        </div>
+    </div>
+
+
+</div>
+<hr />
+
+<h4 class="mt-4">Recent Employees</h4>
+
+@{
+    var userRole = Context.Session.GetString("UserRole");
+    var userEmail = Context.Session.GetString("UserEmail");
+
+    if (userRole == "HRSir")
+    {
+      
+<input type="text" id="searchInput" placeholder="Search..." class="form-control mb-3" />
+
+    }
+}
+
+
+<table id="dataTable" class="table table-hover bg-white rounded">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+         @foreach (var s in Model)
+            {
+        <tr>
+            <td>@s.Name</td>
+            <td>@s.Email</td>
+        </tr>
+        }
+        
+    </tbody>
+</table>
+
+
+<script src="~/js/site.js" asp-append-version="true"></script> 
